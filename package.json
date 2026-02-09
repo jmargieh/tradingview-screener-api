@@ -1,0 +1,68 @@
+{
+  "name": "tradingview-screener",
+  "version": "1.0.0",
+  "description": "TypeScript port of TradingView Screener API - query stocks, crypto, forex, bonds, futures with 13,000+ fields",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "bin": {
+    "tvscreener-mcp": "./dist/mcp/server.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "type-check": "tsc --noEmit",
+    "codegen:generate": "tsx src/codegen/generate.ts",
+    "mcp:server": "node dist/mcp/server.js",
+    "example:quickstart": "tsx examples/quickstart.ts",
+    "example:value-investing": "tsx examples/value-investing.ts",
+    "example:technical-analysis": "tsx examples/technical-analysis.ts",
+    "prepublishOnly": "npm run build && npm run test"
+  },
+  "keywords": [
+    "tradingview",
+    "screener",
+    "stocks",
+    "crypto",
+    "forex",
+    "financial-data",
+    "market-data",
+    "typescript",
+    "mcp"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.0",
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "tsup": "^8.0.0",
+    "vitest": "^1.6.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "playwright": "^1.45.0",
+    "tsx": "^4.7.0",
+    "@types/node": "^20.11.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
