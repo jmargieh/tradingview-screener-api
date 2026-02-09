@@ -335,10 +335,4 @@ npm run codegen:generate
 - TypeScript 5+
 
 ## License
-
 MIT
-
-## Credits
-
-TypeScript port of [tvscreener](https://github.com/your-repo) by shner-elmo.
-
