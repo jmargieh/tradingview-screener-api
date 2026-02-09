@@ -68,14 +68,14 @@ Comprehensive documentation for the TradingView Screener API TypeScript library.
 
 ## Quick Links
 
-- [GitHub Repository](https://github.com/jmargieh/tradingview-screener-api)
+- [GitHub Repository](https://github.com/jmargieh/tradingview-screener)
 - [NPM Package](https://www.npmjs.com/package/tradingview-screener)
-- [Issue Tracker](https://github.com/jmargieh/tradingview-screener-api/issues)
+- [Issue Tracker](https://github.com/jmargieh/tradingview-screener/issues)
 
 ## Support
 
-- **Questions**: Open a [GitHub Discussion](https://github.com/jmargieh/tradingview-screener-api/discussions)
-- **Bugs**: Report on [GitHub Issues](https://github.com/jmargieh/tradingview-screener-api/issues)
+- **Questions**: Open a [GitHub Discussion](https://github.com/jmargieh/tradingview-screener/discussions)
+- **Bugs**: Report on [GitHub Issues](https://github.com/jmargieh/tradingview-screener/issues)
 
 ## License
 

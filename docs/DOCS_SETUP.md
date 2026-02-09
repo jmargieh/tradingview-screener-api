@@ -10,7 +10,7 @@ Start the development server:
 npm run docs:dev
 ```
 
-The dev server will start at http://localhost:5173/tradingview-screener-api/
+The dev server will start at http://localhost:5173/tradingview-screener/
 
 ## Building
 
@@ -38,7 +38,7 @@ The documentation is automatically deployed to GitHub Pages when you push to the
 4. Push to main branch to trigger deployment
 
 Your docs will be available at:
-`https://jmargieh.github.io/tradingview-screener-api/`
+`https://jmargieh.github.io/tradingview-screener/`
 
 ## Structure
 

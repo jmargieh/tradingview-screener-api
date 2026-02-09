@@ -4,7 +4,7 @@ export default defineConfig({
   title: 'TradingView Screener API',
   description: 'TypeScript library for querying stocks, crypto, forex, bonds, and futures with 13,000+ fields',
 
-  base: '/tradingview-screener-api/',
+  base: '/tradingview-screener/',
 
   ignoreDeadLinks: [
     /^http:\/\/localhost/,
@@ -18,7 +18,7 @@ export default defineConfig({
       { text: 'Guide', link: '/quickstart' },
       { text: 'API Reference', link: '/api/base-screener' },
       { text: 'Examples', link: '/examples/value-investing' },
-      { text: 'GitHub', link: 'https://github.com/jmargieh/tradingview-screener-api' }
+      { text: 'GitHub', link: 'https://github.com/jmargieh/tradingview-screener' }
     ],
 
     sidebar: [
@@ -117,7 +117,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/jmargieh/tradingview-screener-api' }
+      { icon: 'github', link: 'https://github.com/jmargieh/tradingview-screener' }
     ],
 
     footer: {
@@ -130,7 +130,7 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: 'https://github.com/jmargieh/tradingview-screener-api/edit/main/docs/:path',
+      pattern: 'https://github.com/jmargieh/tradingview-screener/edit/main/docs/:path',
       text: 'Edit this page on GitHub'
     }
   }

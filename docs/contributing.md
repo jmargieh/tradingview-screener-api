@@ -16,11 +16,11 @@ Guide for contributing to the TradingView Screener API project.
 ```bash
 # Fork the repository on GitHub
 # Then clone your fork
-git clone https://github.com/YOUR_USERNAME/tradingview-screener-api.git
-cd tradingview-screener-api
+git clone https://github.com/YOUR_USERNAME/tradingview-screener.git
+cd tradingview-screener
 
 # Add upstream remote
-git remote add upstream https://github.com/ORIGINAL_OWNER/tradingview-screener-api.git
+git remote add upstream https://github.com/ORIGINAL_OWNER/tradingview-screener.git
 ```
 
 ### Install Dependencies

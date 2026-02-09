@@ -6,7 +6,7 @@ hero:
   text: TypeScript Library for Market Data
   tagline: Query stocks, crypto, forex, bonds, and futures with 13,000+ fields
   image:
-    src: https://github.com/jmargieh/tradingview-screener-api/blob/main/docs/hero-image.png?raw=true
+    src: https://github.com/jmargieh/tradingview-screener/blob/main/docs/hero-image.png?raw=true
     alt: TradingView Screener API
   actions:
     - theme: brand
@@ -14,7 +14,7 @@ hero:
       link: /quickstart
     - theme: alt
       text: View on GitHub
-      link: https://github.com/jmargieh/tradingview-screener-api
+      link: https://github.com/jmargieh/tradingview-screener
     - theme: alt
       text: API Reference
       link: /api/base-screener

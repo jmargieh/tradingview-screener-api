@@ -134,7 +134,7 @@ Add:
     "tradingview-screener": {
       "command": "node",
       "args": [
-        "/Users/i324180/Development/github.com/tradingview-screener-api/dist/mcp/server.js"
+        "/Users/i324180/Development/github.com/tradingview-screener/dist/mcp/server.js"
       ],
       "env": {}
     }

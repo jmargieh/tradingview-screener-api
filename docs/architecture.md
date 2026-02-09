@@ -9,7 +9,7 @@ The TradingView Screener API is a TypeScript library for querying financial mark
 ## Project Structure
 
 ```
-tradingview-screener-api/
+tradingview-screener/
 ├── src/
 │   ├── index.ts                    # Main exports
 │   ├── screeners/
