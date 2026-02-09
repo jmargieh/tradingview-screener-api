@@ -10,7 +10,7 @@ Start the development server:
 npm run docs:dev
 ```
 
-Visit http://localhost:5173/tradingview-screener-api/
+The dev server will start at http://localhost:5173/tradingview-screener-api/
 
 ## Building
 

@@ -6,6 +6,11 @@ export default defineConfig({
 
   base: '/tradingview-screener-api/',
 
+  ignoreDeadLinks: [
+    /^http:\/\/localhost/,
+    './examples/index'
+  ],
+
   themeConfig: {
     logo: '/logo.svg',
 
