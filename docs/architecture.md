@@ -553,4 +553,3 @@ dist/
 
 - [Contributing Guide](contributing.md) - How to contribute
 - [Testing Guide](testing.md) - Running tests
-- [Code Generation](codegen.md) - Generating fields

@@ -110,7 +110,6 @@ export default defineConfig({
         text: 'Development',
         items: [
           { text: 'Architecture', link: '/architecture' },
-          { text: 'Code Generation', link: '/codegen' },
           { text: 'Testing', link: '/testing' },
           { text: 'Contributing', link: '/contributing' },
         ]

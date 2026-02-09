@@ -64,7 +64,6 @@ Comprehensive documentation for the TradingView Screener API TypeScript library.
 ### Development
 - [Contributing](contributing.md) - How to contribute
 - [Testing](testing.md) - Running and writing tests
-- [Code Generation](codegen.md) - Generating field definitions
 - [Architecture](architecture.md) - Project structure
 
 ## Quick Links

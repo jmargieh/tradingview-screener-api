@@ -196,7 +196,7 @@ const indicators = BaseField.technicals(StockField);
 
 ## Note on Field Generation
 
-The current implementation includes 15+ essential stock fields as placeholders. The full set of 4,000+ stock fields can be generated using the code generation system. See the [Code Generation Guide](../codegen.md) for details.
+The current implementation includes 15+ essential stock fields as placeholders. The full set of 4,000+ stock fields can be generated using the code generation system.
 
 ## Next Steps
 

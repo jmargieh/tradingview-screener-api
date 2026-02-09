@@ -537,5 +537,5 @@ jobs:
 ## Next Steps
 
 - [Contributing Guide](contributing.md) - Contribution guidelines
-- [Code Generation](codegen.md) - Generating field definitions
+- [Architecture](architecture.md) - Project structure
 - [Architecture](architecture.md) - Project structure
