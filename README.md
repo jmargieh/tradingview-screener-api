@@ -1,6 +1,8 @@
 # TradingView Screener API - TypeScript
 
-> Query stocks, crypto, forex, bonds, and futures from TradingView
+<p align="center">
+  <img alt="TradingView Screener API" height="300" src="docs/hero-image.png" width="300"/>
+</p>
 
 TypeScript port of the [tvscreener](https://github.com/deepentropy/tvscreener/) Python library. Full-featured screener API with fluent methods, type safety, and MCP server support.
 
