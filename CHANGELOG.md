@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.2.0] - TBD
+## [2.2.0] - 2026-02-10
 
 ### Added
 - **Complete ForexField implementation**: 2,965 field constants providing full parity with Python tvscreener library
@@ -40,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - File size: src/fields/ForexField.ts now 539 KB, 23,768 lines
 - All fields sourced from: https://github.com/deepentropy/tvscreener/blob/main/tvscreener/field/forex.py
 
-## [2.1.0] - TBD
+## [2.1.0] - 2026-02-10
 
 ### Added
 - **Complete CryptoField implementation**: 3,108 field constants providing full parity with Python tvscreener library
@@ -84,7 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - File size: src/fields/CryptoField.ts now 569 KB, 24,885 lines
 - All fields sourced from: https://github.com/deepentropy/tvscreener/blob/main/tvscreener/field/crypto.py
 
-## [2.0.0] - TBD
+## [2.0.0] - 2026-02-10
 
 ### Added
 - **Complete field implementation**: 3,522 StockField constants providing full parity with Python tvscreener library
