@@ -2,6 +2,8 @@
 
 Cryptocurrency screening strategies.
 
+> **Note**: This library supports 3,108 cryptocurrency fields for comprehensive market analysis. All field references in this guide use validated field names from the TradingView API.
+
 ## Overview
 
 Screen cryptocurrencies by market cap, volume, price movement, and technical indicators.
@@ -97,9 +99,9 @@ async function volumeSurge() {
 ```typescript
 crypto
   .where(CryptoField.MARKET_CAP.between(100_000_000, 1_000_000_000))
-  .where(CryptoField.CHANGE_PERCENT_1W.gt(15))
+  .where(CryptoField.CHANGE_1W_PERCENT.gt(15))
   .where(CryptoField.VOLUME_24H_IN_USD.gte(5_000_000))
-  .sortBy(CryptoField.CHANGE_PERCENT_1W, false);
+  .sortBy(CryptoField.CHANGE_1W_PERCENT, false);
 ```
 
 ### Small-Cap High Risk
@@ -122,18 +124,18 @@ async function cryptoMomentum() {
 
   crypto
     .where(CryptoField.CHANGE_PERCENT.gt(3))
-    .where(CryptoField.CHANGE_PERCENT_1W.gt(10))
-    .where(CryptoField.CHANGE_PERCENT_1M.gt(20))
+    .where(CryptoField.CHANGE_1W_PERCENT.gt(10))
+    .where(CryptoField.CHANGE_1M_PERCENT.gt(20))
     .where(CryptoField.MARKET_CAP.gt(100_000_000))
     .where(CryptoField.VOLUME_24H_IN_USD.gte(10_000_000))
     .select(
       CryptoField.NAME,
       CryptoField.PRICE,
       CryptoField.CHANGE_PERCENT,
-      CryptoField.CHANGE_PERCENT_1W,
-      CryptoField.CHANGE_PERCENT_1M
+      CryptoField.CHANGE_1W_PERCENT,
+      CryptoField.CHANGE_1M_PERCENT
     )
-    .sortBy(CryptoField.CHANGE_PERCENT_1M, false);
+    .sortBy(CryptoField.CHANGE_1M_PERCENT, false);
 
   return await crypto.get();
 }
@@ -147,20 +149,20 @@ Potential bounce candidates:
 
 ```typescript
 crypto
-  .where(CryptoField.RSI.lt(30))
+  .where(CryptoField.RELATIVE_STRENGTH_INDEX_14.lt(30))
   .where(CryptoField.MARKET_CAP.gt(100_000_000))
   .where(CryptoField.VOLUME_24H_IN_USD.gte(5_000_000))
-  .sortBy(CryptoField.RSI, true);
+  .sortBy(CryptoField.RELATIVE_STRENGTH_INDEX_14, true);
 ```
 
 ### Overbought Warning
 
 ```typescript
 crypto
-  .where(CryptoField.RSI.gt(70))
+  .where(CryptoField.RELATIVE_STRENGTH_INDEX_14.gt(70))
   .where(CryptoField.MARKET_CAP.gt(500_000_000))
   .where(CryptoField.CHANGE_PERCENT.gt(5))
-  .sortBy(CryptoField.RSI, false);
+  .sortBy(CryptoField.RELATIVE_STRENGTH_INDEX_14, false);
 ```
 
 ## Price Action Screening
@@ -169,7 +171,7 @@ crypto
 
 ```typescript
 crypto
-  .where(CryptoField.PRICE.gte(CryptoField.PRICE_ALL_TIME_HIGH.multiply(0.95)))
+  .where(CryptoField.PRICE.gte(CryptoField.ALL_TIME_HIGH.multiply(0.95)))
   .where(CryptoField.MARKET_CAP.gt(100_000_000))
   .where(CryptoField.VOLUME_24H_IN_USD.gte(10_000_000))
   .sortBy(CryptoField.CHANGE_PERCENT, false);
@@ -179,10 +181,10 @@ crypto
 
 ```typescript
 crypto
-  .where(CryptoField.PRICE.lte(CryptoField.PRICE_52W_LOW.multiply(1.2)))
-  .where(CryptoField.CHANGE_PERCENT_1W.gt(10))
+  .where(CryptoField.PRICE.lte(CryptoField.WEEK_LOW_52.multiply(1.2)))
+  .where(CryptoField.CHANGE_1W_PERCENT.gt(10))
   .where(CryptoField.MARKET_CAP.gt(50_000_000))
-  .sortBy(CryptoField.CHANGE_PERCENT_1W, false);
+  .sortBy(CryptoField.CHANGE_1W_PERCENT, false);
 ```
 
 ## DeFi Tokens
@@ -192,7 +194,7 @@ async function defiScreen() {
   const crypto = new CryptoScreener();
 
   crypto
-    .where(CryptoField.CATEGORY.eq('DeFi'))
+    .where(CryptoField.SECTOR.eq('DeFi'))
     .where(CryptoField.MARKET_CAP.gt(50_000_000))
     .where(CryptoField.VOLUME_24H_IN_USD.gte(5_000_000))
     .select(
@@ -260,20 +262,20 @@ async function liveCryptoMonitor() {
 
 ```typescript
 crypto
-  .where(CryptoField.VOLATILITY_1M.gt(0.5))
+  .where(CryptoField.VOLATILITY_MONTH.gt(0.5))
   .where(CryptoField.MARKET_CAP.gt(100_000_000))
   .where(CryptoField.VOLUME_24H_IN_USD.gte(10_000_000))
-  .sortBy(CryptoField.VOLATILITY_1M, false);
+  .sortBy(CryptoField.VOLATILITY_MONTH, false);
 ```
 
 ### Low Volatility (Stablecoins excluded)
 
 ```typescript
 crypto
-  .where(CryptoField.VOLATILITY_1M.lt(0.2))
+  .where(CryptoField.VOLATILITY_MONTH.lt(0.2))
   .where(CryptoField.MARKET_CAP.gt(500_000_000))
-  .where(CryptoField.CATEGORY.ne('Stablecoin'))
-  .sortBy(CryptoField.VOLATILITY_1M, true);
+  .where(CryptoField.SECTOR.ne('Stablecoin'))
+  .sortBy(CryptoField.VOLATILITY_MONTH, true);
 ```
 
 ## Multi-Timeframe Analysis
@@ -288,20 +290,18 @@ async function multiTimeframeAnalysis() {
       CryptoField.NAME,
       CryptoField.PRICE,
       CryptoField.CHANGE_PERCENT,
-      CryptoField.CHANGE_PERCENT_1W,
-      CryptoField.CHANGE_PERCENT_1M,
-      CryptoField.CHANGE_PERCENT_3M
+      CryptoField.CHANGE_1W_PERCENT,
+      CryptoField.CHANGE_1M_PERCENT
     )
-    .sortBy(CryptoField.CHANGE_PERCENT_1M, false);
+    .sortBy(CryptoField.CHANGE_1M_PERCENT, false);
 
   const results = await crypto.get();
 
-  // Find consistent performers
+  // Find consistent performers across all timeframes
   const consistent = results.data.filter(coin =>
     coin.change_percent > 0 &&
-    coin.change_percent_1w > 0 &&
-    coin.change_percent_1m > 0 &&
-    coin.change_percent_3m > 0
+    coin.change_1w_percent > 0 &&
+    coin.change_1m_percent > 0
   );
 
   return {

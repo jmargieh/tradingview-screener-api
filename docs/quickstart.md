@@ -176,6 +176,8 @@ const results = await screener.get();
 console.table(results.data);
 ```
 
+> **Note:** CryptoField provides access to 3,108 different fields for comprehensive cryptocurrency analysis.
+
 ### Technical Analysis
 
 Find momentum stocks:

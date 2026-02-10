@@ -5,6 +5,50 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - TBD
+
+### Added
+- **Complete CryptoField implementation**: 3,108 field constants providing full parity with Python tvscreener library
+- All major crypto field categories now available:
+  - Price & Volume: 136 fields with timeframe support (24H metrics, volume changes)
+  - Technical Indicators: 2,400+ fields including:
+    - Moving Averages: 404 fields (SMA, EMA, VWMA)
+    - RSI variations: 218 fields
+    - Stochastic: 229 fields
+    - ADX: 266 fields
+    - Bollinger Bands: 60 fields
+    - MACD: 30 fields
+    - Ichimoku: 90 fields
+    - Other indicators: 800+ fields
+  - Candlestick Patterns: 270 fields
+  - Pivot Points: 310 fields
+  - Recommendations: 63 fields
+  - Market Data: 76 fields (Highs/Lows)
+
+### Changed
+- **MAJOR UPDATE**: CryptoField.ts completely rewritten with all 3,108 fields organized into 20+ logical categories
+- README.md: Updated crypto section to reflect complete 3,108 field implementation
+- Documentation comprehensively updated:
+  - `docs/fields/crypto-fields.md`: Complete field reference with categories, intervals, and usage examples
+  - `docs/examples/crypto-trading.md`: Fixed 9 broken field references, rewritten with real fields
+  - `docs/screeners/crypto.md`: Updated with complete field coverage and multi-timeframe analysis
+  - `docs/quickstart.md`: Verified crypto examples, added field count note
+
+### Fixed
+- `docs/examples/crypto-trading.md` no longer uses unimplemented fields (9 invalid fields replaced)
+- All crypto documentation examples now use only real, implemented fields
+
+### Breaking Changes
+- None - this is a pure addition. All existing 5 CryptoField constants remain unchanged and backward compatible
+
+### Technical Details
+- Total crypto fields: 3,108 (from 5)
+- Format types: 11 (float, bool, number_group, percent, rating, date, round, computed_recommendation, text, missing, recommendation)
+- Interval support: 2,673 fields (86.0%)
+- Historical data support: 839 fields (27.0%)
+- File size: src/fields/CryptoField.ts now 569 KB, 24,885 lines
+- All fields sourced from: https://github.com/deepentropy/tvscreener/blob/main/tvscreener/field/crypto.py
+
 ## [2.0.0] - TBD
 
 ### Added

@@ -4,14 +4,14 @@
   <img alt="TradingView Screener API" height="300" src="docs/hero-image.png" width="300"/>
 </p>
 
-TypeScript port of the [tvscreener](https://github.com/deepentropy/tvscreener/) Python library with **full field parity** (3,522 fields). Full-featured screener API with fluent methods, type safety, and MCP server support.
+TypeScript port of the [tvscreener](https://github.com/deepentropy/tvscreener/) Python library with **full field parity** (3,522 stock fields + 3,108 crypto fields). Full-featured screener API with fluent methods, type safety, and MCP server support.
 
 📚 **[Complete Documentation](https://jmargieh.github.io/tradingview-screener/)** | 🚀 **[Quick Start](https://jmargieh.github.io/tradingview-screener/quickstart.html)** | 📖 **[API Reference](https://jmargieh.github.io/tradingview-screener/api/base-screener.html)**
 
 ## Features
 
 - **6 Asset Types**: Stocks, Crypto, Forex, Bonds, Futures, Coins
-- **3,522 Fields**: Complete field implementation with full parity to Python tvscreener
+- **3,522 Stock Fields + 3,108 Crypto Fields**: Complete field implementation with full parity to Python tvscreener
 - **Type Safe**: Full TypeScript support with strict typing
 - **Fluent API**: Chainable methods with TypeScript autocomplete
 - **Streaming**: Real-time data updates with async generators
@@ -111,7 +111,9 @@ crypto
     CryptoField.NAME,
     CryptoField.PRICE,
     CryptoField.CHANGE_PERCENT,
-    CryptoField.VOLUME_24H_IN_USD
+    CryptoField.VOLUME_24H_IN_USD,
+    CryptoField.CIRCULATING_SUPPLY,
+    CryptoField.TOTAL_SUPPLY
   )
   .sortBy(CryptoField.VOLUME_24H_IN_USD, false);
 
@@ -234,11 +236,45 @@ Most technical and price fields support:
 - **Time intervals**: `1`, `5`, `15`, `30`, `60`, `120`, `240` (minutes), `1D`, `1W`, `1M`
 - **Historical data**: Access previous values with `.withHistory(index)`
 
-### Crypto Fields
+### Crypto Fields (3,108 fields implemented)
 
-- **Price**: `PRICE`, `CHANGE_PERCENT`, `VOLUME_24H_IN_USD`
-- **Market**: `MARKET_CAP`, `CIRCULATING_SUPPLY`, `TOTAL_SUPPLY`
-- **Technical**: All standard technical indicators
+This library provides **complete field parity** with the Python tvscreener library for cryptocurrencies, including all 3,108 fields across these major categories:
+
+#### Core Price & Market Data
+- **Price**: `PRICE`, `CHANGE`, `CHANGE_PERCENT`, `CHANGE_FROM_OPEN`, `CHANGE_FROM_OPEN_PERCENT`
+- **Volume**: `VOLUME_24H_IN_USD`, `VOLUME_24H_CHANGE_PERCENT`, `AVERAGE_VOLUME_10D_CALC_USD`, `AVERAGE_VOLUME_30D_CALC_USD`, `AVERAGE_VOLUME_60D_CALC_USD`, `AVERAGE_VOLUME_90D_CALC_USD`
+- **Market Cap**: `MARKET_CAP`, `MARKET_CAPITALIZATION`, `FULLY_DILUTED_MARKET_CAP`, `MARKET_CAP_TO_TVL`
+- **Supply**: `CIRCULATING_SUPPLY`, `TOTAL_SUPPLY`, `CIRCULATING_TO_MAX_SUPPLY_RATIO`
+- **Price Ranges**: `WEEK_HIGH_52`, `WEEK_LOW_52`, `ALL_TIME_HIGH`, `ALL_TIME_LOW`, `MONTH_HIGH_1`, `MONTH_LOW_1`, `MONTH_HIGH_3`, `MONTH_HIGH_6`
+
+#### Blockchain Metrics
+- **Addresses**: `ADDRESSES_ACTIVE`, `ADDRESSES_NEW`, `ADDRESSES_TOTAL`, `ADDRESSES_ZERO_BALANCE`, `ACTIVE_ADDRESSES_RATIO`
+- **Transactions**: `AVERAGE_TRANSACTION_USD`
+- **Holders**: `AT_THE_MONEY_ADDRESSES_PERCENTAGE`, `BREAK_EVEN_ADDRESSES_PERCENTAGE`, `IN_THE_MONEY_ADDRESSES_PERCENTAGE`
+- **Balance**: `AVG_BALANCE`
+
+#### DeFi & DEX Data
+- **DEX Volume**: `DEX_TRADING_VOLUME_24H`, `DEX_TRADING_VOLUME_12H`, `DEX_TRADING_VOLUME_4H`, `DEX_TRADING_VOLUME_1H`, `DEX_TRADING_VOLUME_15M`
+- **DEX Trades**: `DEX_BUY_VOLUME_24H`, `DEX_BUY_VOLUME_12H`, `DEX_SELL_VOLUME_24H`, `DEX_SELL_VOLUME_12H`, `DEX_TOTAL_SUPPLY`
+- **Liquidity**: `TVL`, `MARKET_CAP_TO_TVL`
+
+#### Technical Indicators
+- **Momentum**: `RSI` (multiple periods with intervals), `MOMENTUM_10`, `AWESOME_OSCILLATOR`, `STOCH_RSI_K` (with period), `STOCH_RSI_D` (with period)
+- **Volatility**: `ATR` (with interval), `ATRP`, `BB_UPPER` (with period), `BB_LOWER` (with period), `BB_BASIS` (with period), `AVERAGE_DAY_RANGE_14`
+- **Trend**: `ADX` (with period), `ADX_PLUS_DI` (with period), `ADX_MINUS_DI` (with period), `SMA` (periods 5-300), `EMA` (periods 5-200)
+- **Volume Indicators**: `RELATIVE_VOLUME`, `VOLUME_WEIGHTED_AVERAGE_PRICE`
+- **Oscillators**: `STOCH_K` (with period), `STOCH_D` (with period), `CCI20` (with interval), `MACD_LEVEL`, `MACD_MACD`, `MACD_HIST`, `MACD_SIGNAL`
+- **Ichimoku**: `ICHIMOKU_BASE_LINE` (with parameters), `ICHIMOKU_BLINE` (with parameters), `ICHIMOKU_CLINE` (with parameters), `ICHIMOKU_LEAD1` (with parameters), `ICHIMOKU_LEAD2` (with parameters)
+- **Pattern Recognition**: `CANDLE_DOJI`, `CANDLE_HAMMER`, `CANDLE_SHOOTINGSTAR`, `CANDLE_ENGULFING_BULLISH`, `CANDLE_ENGULFING_BEARISH`
+
+#### Performance Metrics
+- **Historical Performance**: `MONTHLY_PERFORMANCE`, `MONTH_PERFORMANCE_3`, `MONTH_PERFORMANCE_6`, `YEARLY_PERFORMANCE`, `Y_PERFORMANCE_5`, `ALL_TIME_PERFORMANCE`, `YTD_PERFORMANCE`
+- **Change Metrics**: Multiple time intervals (1m, 5m, 15m, 30m, 1h, 2h, 4h, 1D, 1W, 1M) for all price change fields
+
+#### Time Intervals & Historical Data
+Most technical and price fields support:
+- **Time intervals**: `1`, `5`, `15`, `30`, `60`, `120`, `240` (minutes), `1D`, `1W`, `1M`
+- **Historical data**: Access previous values with `.withHistory(index)`
 
 ## Comparison Operators
 
