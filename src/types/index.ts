@@ -13,7 +13,8 @@ export type FieldFormat =
   | 'bool'
   | 'rating'
   | 'recommendation'
-  | 'computed_recommendation';
+  | 'computed_recommendation'
+  | 'missing';
 
 export interface FieldMetadata {
   label: string;

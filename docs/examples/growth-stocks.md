@@ -1,16 +1,14 @@
 # Growth Stocks
 
-Finding high-growth companies with strong momentum.
+Finding high-growth companies with strong momentum and profitability.
 
 ## Overview
 
-Growth investing focuses on companies with above-average revenue and earnings growth, typically trading at premium valuations.
+Growth investing focuses on companies with above-average revenue and earnings growth, typically trading at premium valuations. This guide leverages the **3,522 available fields** in the TradingView Screener API to identify growth opportunities using metrics like revenue growth, margins, returns, and cash flow.
 
-## Basic Growth Screen
+## High-Quality Growth Screen
 
-### High Revenue Growth
-
-Find companies with strong revenue expansion:
+Companies with strong growth, profitability, and returns:
 
 ```typescript
 import { StockScreener, StockField } from 'tradingview-screener';
@@ -18,12 +16,30 @@ import { StockScreener, StockField } from 'tradingview-screener';
 const screener = new StockScreener();
 
 screener
-  .where(StockField.REVENUE_TTM_YOY_GROWTH.gt(20))
+  // Strong revenue growth
+  .where(StockField.REVENUE_TTM_YOY_GROWTH.gt(25))
+
+  // Excellent profitability
+  .where(StockField.RETURN_ON_EQUITY_FY.gt(18))
+  .where(StockField.OPERATING_MARGIN_FY.gt(15))
+  .where(StockField.NET_MARGIN_FY.gt(10))
+
+  // Positive cash flow
+  .where(StockField.FREE_CASH_FLOW_TTM.gt(0))
+
+  // Financial health
+  .where(StockField.DEBT_TO_EQUITY_FY.lt(0.75))
+
+  // Size
   .where(StockField.MARKET_CAPITALIZATION.gt(1e9))
+
   .select(
     StockField.NAME,
     StockField.PRICE,
     StockField.REVENUE_TTM_YOY_GROWTH,
+    StockField.RETURN_ON_EQUITY_FY,
+    StockField.OPERATING_MARGIN_FY,
+    StockField.FREE_CASH_FLOW_TTM,
     StockField.MARKET_CAPITALIZATION
   )
   .sortBy(StockField.REVENUE_TTM_YOY_GROWTH, false)
@@ -33,27 +49,9 @@ const results = await screener.get();
 console.table(results.data);
 ```
 
-### Profitable Companies
+## GARP Strategy (Growth at Reasonable Price)
 
-Companies with positive earnings:
-
-```typescript
-screener
-  .where(StockField.NET_INCOME_TTM.gt(0))  // Profitable
-  .where(StockField.MARKET_CAPITALIZATION.between(1e9, 50e9))  // Mid-cap
-  .where(StockField.EARNINGS_PER_SHARE_DILUTED_TTM.gt(1))
-  .select(
-    StockField.NAME,
-    StockField.PRICE,
-    StockField.NET_INCOME_TTM,
-    StockField.EARNINGS_PER_SHARE_DILUTED_TTM
-  )
-  .sortBy(StockField.NET_INCOME_TTM, false);
-```
-
-## GARP Strategy
-
-Growth at a Reasonable Price:
+Find high-growth stocks with reasonable valuations:
 
 ```typescript
 async function garpScreen() {
@@ -61,11 +59,19 @@ async function garpScreen() {
 
   screener
     // Strong growth
-    .where(StockField.REVENUE_TTM_YOY_GROWTH.gt(15))
+    .where(StockField.REVENUE_TTM_YOY_GROWTH.gt(20))
 
     // Reasonable valuation
     .where(StockField.PRICE_TO_EARNINGS_RATIO_TTM.lt(30))
-    .where(StockField.PRICE_EARNINGS_GROWTH_TTM.lt(2))  // PEG < 2
+    .where(StockField.PRICE_EARNINGS_GROWTH_TTM.lt(1.5))  // PEG < 1.5
+    .where(StockField.PRICE_TO_FREE_CASH_FLOW_TTM.lt(35))
+
+    // Strong profitability
+    .where(StockField.RETURN_ON_EQUITY_FY.gt(15))
+    .where(StockField.OPERATING_MARGIN_FY.gt(12))
+
+    // Positive cash generation
+    .where(StockField.FREE_CASH_FLOW_TTM.gt(0))
 
     // Size
     .where(StockField.MARKET_CAPITALIZATION.gt(2e9))
@@ -75,7 +81,9 @@ async function garpScreen() {
       StockField.PRICE,
       StockField.REVENUE_TTM_YOY_GROWTH,
       StockField.PRICE_TO_EARNINGS_RATIO_TTM,
-      StockField.PRICE_EARNINGS_GROWTH_TTM
+      StockField.PRICE_EARNINGS_GROWTH_TTM,
+      StockField.RETURN_ON_EQUITY_FY,
+      StockField.OPERATING_MARGIN_FY
     )
     .sortBy(StockField.PRICE_EARNINGS_GROWTH_TTM, true);
 
@@ -87,42 +95,59 @@ const garpStocks = await garpScreen();
 console.table(garpStocks.data);
 ```
 
-## High-Growth Companies
+## Cash Flow Growth
 
-Companies with strong revenue growth:
+Focus on companies with strong and growing free cash flow:
 
 ```typescript
 const screener = new StockScreener();
 
 screener
-  // Strong growth
-  .where(StockField.REVENUE_TTM_YOY_GROWTH.gt(30))
+  // Strong FCF growth
+  .where(StockField.FREE_CASH_FLOW_TTM_YOY_GROWTH.gt(20))
 
-  // Profitable
+  // Strong current FCF
+  .where(StockField.FREE_CASH_FLOW_TTM.gt(100e6))
+
+  // Good FCF margin
+  .where(StockField.FREE_CASH_FLOW_MARGIN_TTM.gt(10))
+
+  // Revenue growth
+  .where(StockField.REVENUE_TTM_YOY_GROWTH.gt(15))
+
+  // Profitability
   .where(StockField.NET_INCOME_TTM.gt(0))
 
   .select(
     StockField.NAME,
     StockField.PRICE,
+    StockField.FREE_CASH_FLOW_TTM_YOY_GROWTH,
+    StockField.FREE_CASH_FLOW_MARGIN_TTM,
     StockField.REVENUE_TTM_YOY_GROWTH,
     StockField.NET_INCOME_TTM
   )
-  .sortBy(StockField.REVENUE_TTM_YOY_GROWTH, false);
+  .sortBy(StockField.FREE_CASH_FLOW_TTM_YOY_GROWTH, false);
 ```
 
-## Small-Cap Growth
+## High-Efficiency Growth
 
-High-growth small companies:
+Companies with exceptional asset efficiency and returns:
 
 ```typescript
 const screener = new StockScreener();
 
 screener
-  // Small-cap range
-  .where(StockField.MARKET_CAPITALIZATION.between(300e6, 2e9))
+  // Exceptional returns
+  .where(StockField.RETURN_ON_EQUITY_FY.gt(25))
+  .where(StockField.RETURN_ON_INVESTED_CAPITAL_FY.gt(20))
+  .where(StockField.ASSET_TURNOVER_FY.gt(1))
 
-  // Explosive growth
-  .where(StockField.REVENUE_TTM_YOY_GROWTH.gt(40))
+  // Strong growth
+  .where(StockField.REVENUE_TTM_YOY_GROWTH.gt(15))
+
+  // Strong margins
+  .where(StockField.OPERATING_MARGIN_FY.gt(15))
+  .where(StockField.GROSS_MARGIN_FY.gt(40))
 
   // Liquidity
   .where(StockField.VOLUME.gte(100_000))
@@ -133,11 +158,13 @@ screener
   .select(
     StockField.NAME,
     StockField.PRICE,
-    StockField.MARKET_CAPITALIZATION,
+    StockField.RETURN_ON_EQUITY_FY,
+    StockField.RETURN_ON_INVESTED_CAPITAL_FY,
     StockField.REVENUE_TTM_YOY_GROWTH,
+    StockField.OPERATING_MARGIN_FY,
     StockField.VOLUME
   )
-  .sortBy(StockField.REVENUE_TTM_YOY_GROWTH, false);
+  .sortBy(StockField.RETURN_ON_EQUITY_FY, false);
 ```
 
 ## Growth with Profitability
@@ -343,7 +370,7 @@ screener
 
 ## Growth Score System
 
-Comprehensive growth scoring:
+Comprehensive growth scoring using multiple metrics:
 
 ```typescript
 async function growthScoreScreen() {
@@ -358,30 +385,52 @@ async function growthScoreScreen() {
       StockField.REVENUE_TTM_YOY_GROWTH,
       StockField.NET_INCOME_TTM,
       StockField.PRICE_EARNINGS_GROWTH_TTM,
+      StockField.RETURN_ON_EQUITY_FY,
+      StockField.OPERATING_MARGIN_FY,
+      StockField.FREE_CASH_FLOW_TTM_YOY_GROWTH,
+      StockField.DEBT_TO_EQUITY_FY,
       StockField.CHANGE_PERCENT
     );
 
   const results = await screener.get();
 
-  // Calculate growth score
+  // Calculate comprehensive growth score
   const scored = results.data.map(stock => {
     let score = 0;
 
-    // Revenue growth
-    if (stock.revenue_ttm_yoy_growth > 30) score += 3;
+    // Revenue growth (0-4 points)
+    if (stock.revenue_ttm_yoy_growth > 40) score += 4;
+    else if (stock.revenue_ttm_yoy_growth > 30) score += 3;
     else if (stock.revenue_ttm_yoy_growth > 20) score += 2;
     else if (stock.revenue_ttm_yoy_growth > 15) score += 1;
 
-    // Profitability
+    // Profitability (0-3 points)
     if (stock.net_income_ttm > 500e6) score += 3;
     else if (stock.net_income_ttm > 100e6) score += 2;
     else if (stock.net_income_ttm > 0) score += 1;
 
-    // Valuation (PEG ratio)
+    // Returns (0-3 points)
+    if (stock.return_on_equity_fy > 25) score += 3;
+    else if (stock.return_on_equity_fy > 18) score += 2;
+    else if (stock.return_on_equity_fy > 12) score += 1;
+
+    // Margins (0-2 points)
+    if (stock.operating_margin_fy > 20) score += 2;
+    else if (stock.operating_margin_fy > 15) score += 1;
+
+    // Valuation - PEG ratio (0-2 points)
     if (stock.peg_ratio_ttm && stock.peg_ratio_ttm < 1) score += 2;
     else if (stock.peg_ratio_ttm && stock.peg_ratio_ttm < 1.5) score += 1;
 
-    // Price momentum
+    // Cash flow growth (0-2 points)
+    if (stock.free_cash_flow_ttm_yoy_growth > 30) score += 2;
+    else if (stock.free_cash_flow_ttm_yoy_growth > 15) score += 1;
+
+    // Financial health (0-2 points)
+    if (stock.debt_to_equity_fy < 0.3) score += 2;
+    else if (stock.debt_to_equity_fy < 0.75) score += 1;
+
+    // Price momentum (0-2 points)
     if (stock.change_abs > 2) score += 2;
     else if (stock.change_abs > 0) score += 1;
 
@@ -442,12 +491,40 @@ async function monitorGrowthStocks() {
 
 ## Best Practices
 
-1. **Balance Growth & Valuation**: Use PEG ratio to avoid overpaying
-2. **Quality Matters**: Look for profitable companies with strong earnings
-3. **Size Considerations**: Different market caps have different risk/reward profiles
-4. **Momentum Confirmation**: Combine fundamentals with technicals
-5. **Position Sizing**: Growth stocks are volatile, manage risk
-6. **Revenue Quality**: Focus on companies with strong revenue bases
+1. **Balance Growth & Valuation**: Use PEG ratio and P/FCF to avoid overpaying
+2. **Quality Matters**: Focus on ROE, ROIC, and operating margins
+3. **Cash Flow Focus**: Free cash flow growth is more sustainable than earnings growth
+4. **Margin Expansion**: Look for improving operating and net margins
+5. **Financial Health**: Check debt-to-equity and current ratios
+6. **Size Considerations**: Different market caps have different risk/reward profiles
+7. **Efficiency Metrics**: Use ROE, ROA, ROIC, and asset turnover to find efficient growers
+8. **Revenue Quality**: Focus on companies with strong revenue bases and healthy margins
+
+## Available Growth Fields Summary
+
+**Growth Metrics:**
+- `REVENUE_TTM_YOY_GROWTH`, `FREE_CASH_FLOW_TTM_YOY_GROWTH`
+
+**Profitability & Returns:**
+- `RETURN_ON_EQUITY_FY`, `RETURN_ON_ASSETS_FY`, `RETURN_ON_INVESTED_CAPITAL_FY`
+- `OPERATING_MARGIN_FY`, `NET_MARGIN_FY`, `GROSS_MARGIN_FY`
+- `FREE_CASH_FLOW_MARGIN_TTM`, `ASSET_TURNOVER_FY`
+
+**Valuation:**
+- `PRICE_TO_EARNINGS_RATIO_TTM`, `PRICE_EARNINGS_GROWTH_TTM`
+- `PRICE_TO_FREE_CASH_FLOW_TTM`, `PRICE_SALES_CURRENT`
+
+**Cash Flow:**
+- `FREE_CASH_FLOW_TTM`, `CASH_F_OPERATING_ACTIVITIES_FY`
+
+**Financial Health:**
+- `DEBT_TO_EQUITY_FY`, `CURRENT_RATIO_FQ`
+
+**Fundamentals:**
+- `REVENUE_TTM`, `NET_INCOME_TTM`
+- `EARNINGS_PER_SHARE_DILUTED_TTM`, `MARKET_CAPITALIZATION`
+
+With 3,522 total fields available, you can create highly sophisticated growth screens that identify the best opportunities.
 
 ## Next Steps
 

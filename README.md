@@ -4,13 +4,14 @@
   <img alt="TradingView Screener API" height="300" src="docs/hero-image.png" width="300"/>
 </p>
 
-TypeScript port of the [tvscreener](https://github.com/deepentropy/tvscreener/) Python library. Full-featured screener API with fluent methods, type safety, and MCP server support.
+TypeScript port of the [tvscreener](https://github.com/deepentropy/tvscreener/) Python library with **full field parity** (3,522 fields). Full-featured screener API with fluent methods, type safety, and MCP server support.
 
 📚 **[Complete Documentation](https://jmargieh.github.io/tradingview-screener/)** | 🚀 **[Quick Start](https://jmargieh.github.io/tradingview-screener/quickstart.html)** | 📖 **[API Reference](https://jmargieh.github.io/tradingview-screener/api/base-screener.html)**
 
 ## Features
 
 - **6 Asset Types**: Stocks, Crypto, Forex, Bonds, Futures, Coins
+- **3,522 Fields**: Complete field implementation with full parity to Python tvscreener
 - **Type Safe**: Full TypeScript support with strict typing
 - **Fluent API**: Chainable methods with TypeScript autocomplete
 - **Streaming**: Real-time data updates with async generators
@@ -81,7 +82,7 @@ screener.select(
   StockField.VOLUME
 );
 
-// Select all available fields (3000+)
+// Select all available fields (3,522 fields)
 screener.selectAll();
 ```
 
@@ -190,14 +191,48 @@ const coins = new CoinScreener();
 
 ## Field Categories
 
-### Stock Fields (21 fields implemented)
+### Stock Fields (3,522 fields implemented)
 
-- **Price & Volume**: `PRICE`, `CHANGE`, `CHANGE_PERCENT`, `VOLUME`
-- **Information**: `NAME`, `DESCRIPTION`
-- **Valuation**: `MARKET_CAPITALIZATION`, `PRICE_TO_EARNINGS_RATIO_TTM`, `PRICE_EARNINGS_GROWTH_TTM`, `PRICE_SALES_CURRENT`, `PRICE_TO_BOOK_MRQ`, `ENTERPRISE_VALUE_EBITDA_TTM`
-- **Fundamentals**: `REVENUE_TTM`, `REVENUE_TTM_YOY_GROWTH`, `NET_INCOME_TTM`, `EARNINGS_PER_SHARE_DILUTED_TTM`
-- **Dividends**: `DIVIDEND_YIELD_FWD`, `DIVIDENDS_YIELD_FY`, `DPS_COMMON_STOCK_PRIM_ISSUE_TTM`
-- **Technical**: `RSI`, `ATR`
+This library provides **complete field parity** with the Python tvscreener library, including all 3,522 fields across these major categories:
+
+#### Core Information
+- **Identification**: `NAME`, `DESCRIPTION`, `SECTOR`, `COUNTRY`, `ACTIVE_SYMBOL`
+- **Price & Volume**: `PRICE`, `CHANGE`, `CHANGE_PERCENT`, `VOLUME`, `VOLUME_CHANGE`
+- **Market Data**: `HIGH`, `LOW`, `PRICE_52_WEEK_HIGH_DATE`, `PRICE_52_WEEK_LOW_DATE`
+
+#### Valuation Metrics
+- **Market Cap**: `MARKET_CAPITALIZATION`, `MARKET_CAP_CALC`
+- **Price Ratios**: `PRICE_TO_EARNINGS_RATIO_TTM`, `PRICE_EARNINGS_GROWTH_TTM`, `PRICE_SALES_CURRENT`, `PRICE_TO_BOOK_MRQ`, `PRICE_TO_BOOK_FY`
+- **Enterprise Value**: `ENTERPRISE_VALUE_EBITDA_CURRENT`, `ENTERPRISE_VALUEEBITDA_TTM`
+
+#### Fundamental Metrics
+- **Revenue**: `REVENUE_TTM_YOY_GROWTH`, `REVENUE_FQ`, `REVENUE_PER_SHARE_FY`, `REVENUE_PER_SHARE_TTM`
+- **Earnings**: `NET_INCOME_TTM`, `EARNINGS_PER_SHARE_DILUTED_FQ`, `EBITDA_FY`, `EBITDA_TTM`
+- **Balance Sheet**: `TOTAL_ASSETS_FY`, `TOTAL_DEBT_FY`, `CASH_AND_EQUIVALENTS_FY`, `BOOK_VALUE_PER_SHARE_FY`
+- **Cash Flow**: `CASH_F_OPERATING_ACTIVITIES_TTM`, `CASH_F_INVESTING_ACTIVITIES_TTM`, `CASH_F_FINANCING_ACTIVITIES_TTM`
+
+#### Dividends
+- **Yield**: `DIVIDEND_YIELD_FORWARD`, `DIVIDENDS_YIELD_FY`, `DIVIDENDS_YIELD_CURRENT`
+- **Payments**: `DIVIDEND_AMOUNT_RECENT`, `DIVIDENDS_PER_SHARE_FY`, `DPS_COMMON_STOCK_PRIM_ISSUE_TTM`
+- **Dates**: `DIVIDEND_EX_DATE_RECENT`, `DIVIDEND_PAYMENT_DATE_RECENT`
+
+#### Financial Ratios
+- **Profitability**: `RETURN_ON_EQUITY_FY`, `RETURN_ON_ASSETS_FY`, `GROSS_MARGIN_FY`, `OPERATING_MARGIN_FY`
+- **Leverage**: `DEBT_TO_EQUITY_FY`, `DEBT_TO_ASSETS`, `CURRENT_RATIO_FQ`
+- **Efficiency**: `ASSET_TURNOVER_FY`, `RECEIVABLES_TURNOVER_FY`
+
+#### Technical Indicators
+- **Momentum**: `RSI` (RSI, RSI2, RSI3, RSI4, RSI5, RSI7, RSI9, RSI10, RSI20, RSI21, RSI30 with intervals), `MOM`, `AO` (Awesome Oscillator)
+- **Volatility**: `ATR`, `ATRP`, `BB_UPPER`, `BB_LOWER`, `BB_BASIS` (Bollinger Bands with various periods)
+- **Trend**: `ADX`, `ADX_DI`, `ADX_PLUS_DI` (various periods: 9, 20, 50, 100), `SMA` (periods 3-300), `EMA` (periods 5-200)
+- **Volume**: `AVERAGE_VOLUME`, `RELATIVE_VOLUME`, `VOLUME_WEIGHTED_AVERAGE_PRICE`
+- **Oscillators**: `STOCH_K`, `STOCH_D`, `CCI20` (with intervals), `MACD_LEVEL`, `MACD_MACD`, `MACD_HIST`
+- **Ichimoku**: `ICHIMOKU_BASE_LINE`, `ICHIMOKU_BLINE`, `ICHIMOKU_CLINE`, `ICHIMOKU_LEAD1`, `ICHIMOKU_LEAD2` (various parameter sets)
+
+#### Time Intervals & Historical Data
+Most technical and price fields support:
+- **Time intervals**: `1`, `5`, `15`, `30`, `60`, `120`, `240` (minutes), `1D`, `1W`, `1M`
+- **Historical data**: Access previous values with `.withHistory(index)`
 
 ### Crypto Fields
 
