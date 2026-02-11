@@ -18,7 +18,7 @@ async function main() {
   // - Positive price change
 
   screener
-    .where(StockField.RSI.between(40, 60))
+    .where(StockField.STOCHASTIC_RSI_SLOW_3_3_14_14.between(40, 60))
     .where(StockField.PRICE.gt(20))
     .where(StockField.VOLUME.gte(500_000))
     .where(StockField.MARKET_CAPITALIZATION.gte(500_000_000))
@@ -29,8 +29,7 @@ async function main() {
       StockField.CHANGE,
       StockField.CHANGE_PERCENT,
       StockField.VOLUME,
-      StockField.RSI,
-      StockField.ATR,
+      StockField.STOCHASTIC_RSI_SLOW_3_3_14_14,
       StockField.MARKET_CAPITALIZATION
     )
     .sortBy(StockField.CHANGE_PERCENT, false) // Biggest gainers first

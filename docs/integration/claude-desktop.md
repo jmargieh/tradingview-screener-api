@@ -41,7 +41,7 @@ Edit Claude Desktop configuration file:
   "mcpServers": {
     "tradingview-screener": {
       "command": "npx",
-      "args": ["tvscreener-mcp"],
+      "args": ["tradingview-screener-mcp"],
       "env": {}
     }
   }
@@ -240,7 +240,7 @@ Show me technology stocks with revenue growth over 20%
   "mcpServers": {
     "tradingview-screener": {
       "command": "npx",
-      "args": ["tvscreener-mcp"],
+      "args": ["tradingview-screener-mcp"],
       "env": {
         "MCP_LOG_LEVEL": "debug",
         "MCP_CACHE_ENABLED": "true",
@@ -278,7 +278,7 @@ Show me technology stocks with revenue growth over 20%
     },
     "tradingview-screener-prod": {
       "command": "npx",
-      "args": ["tvscreener-mcp"]
+      "args": ["tradingview-screener-mcp"]
     }
   }
 }
@@ -295,7 +295,7 @@ cat ~/.config/Claude/claude_desktop_config.json | jq
 
 **Verify server command:**
 ```bash
-npx tvscreener-mcp --version
+npx tradingview-screener-mcp --version
 ```
 
 **Check Claude logs:**
@@ -318,7 +318,7 @@ type %LOCALAPPDATA%\Claude\logs\mcp*.log
   "mcpServers": {
     "tradingview-screener": {
       "command": "npx",
-      "args": ["tvscreener-mcp"],
+      "args": ["tradingview-screener-mcp"],
       "env": {
         "MCP_LOG_LEVEL": "debug",
         "NODE_ENV": "development"
@@ -330,7 +330,7 @@ type %LOCALAPPDATA%\Claude\logs\mcp*.log
 
 **Check for errors:**
 ```bash
-npx tvscreener-mcp 2>&1 | tee server.log
+npx tradingview-screener-mcp 2>&1 | tee server.log
 ```
 
 ### Rate Limiting
@@ -342,7 +342,7 @@ If you see rate limit errors, add delays between requests:
   "mcpServers": {
     "tradingview-screener": {
       "command": "npx",
-      "args": ["tvscreener-mcp"],
+      "args": ["tradingview-screener-mcp"],
       "env": {
         "MCP_RATE_LIMIT_DELAY": "1000"
       }
@@ -355,7 +355,7 @@ If you see rate limit errors, add delays between requests:
 
 **macOS/Linux:**
 ```bash
-chmod +x $(which tvscreener-mcp)
+chmod +x $(which tradingview-screener-mcp)
 ```
 
 **Windows:**

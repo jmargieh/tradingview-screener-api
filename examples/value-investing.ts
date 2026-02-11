@@ -21,17 +21,17 @@ async function main() {
     .where(StockField.PRICE_TO_EARNINGS_RATIO_TTM.lt(15))
     .where(StockField.PRICE_TO_BOOK_MRQ.lt(3))
     .where(StockField.MARKET_CAPITALIZATION.gte(1e9))
-    .where(StockField.DIVIDEND_YIELD_FWD.gte(2))
-    .where(StockField.EARNINGS_PER_SHARE_DILUTED_TTM.gt(0))
+    .where(StockField.DIVIDEND_YIELD_FORWARD.gte(2))
+    .where(StockField.EARNINGS_PER_SHARE_BASIC_TTM.gt(0))
     .select(
       StockField.NAME,
       StockField.PRICE,
       StockField.MARKET_CAPITALIZATION,
       StockField.PRICE_TO_EARNINGS_RATIO_TTM,
       StockField.PRICE_TO_BOOK_MRQ,
-      StockField.DIVIDEND_YIELD_FWD,
-      StockField.EARNINGS_PER_SHARE_DILUTED_TTM,
-      StockField.REVENUE_TTM,
+      StockField.DIVIDEND_YIELD_FORWARD,
+      StockField.EARNINGS_PER_SHARE_BASIC_TTM,
+      StockField.TOTAL_REVENUE_TTM,
       StockField.NET_INCOME_TTM
     )
     .sortBy(StockField.PRICE_TO_EARNINGS_RATIO_TTM, true) // Lowest P/E first

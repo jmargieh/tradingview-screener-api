@@ -19,7 +19,7 @@ npm install tradingview-screener
 ### Standalone Mode
 
 ```bash
-npx tvscreener-mcp
+npx tradingview-screener-mcp
 ```
 
 ### Programmatic Usage
@@ -456,10 +456,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 npm install -g @modelcontextprotocol/cli
 
 # Test discover_fields
-mcp call tvscreener-mcp discover_fields '{"query": "price", "assetType": "stock"}'
+mcp call tradingview-screener-mcp discover_fields '{"query": "price", "assetType": "stock"}'
 
 # Test custom_query
-mcp call tvscreener-mcp custom_query '{
+mcp call tradingview-screener-mcp custom_query '{
   "assetType": "stock",
   "filters": [
     {"field": "PRICE", "operator": "greater", "value": 100}

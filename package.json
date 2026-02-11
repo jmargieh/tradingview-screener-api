@@ -14,7 +14,7 @@
     }
   },
   "bin": {
-    "tvscreener-mcp": "./dist/mcp/server.js"
+    "tradingview-screener-mcp": "./dist/mcp/server.js"
   },
   "files": [
     "dist",
