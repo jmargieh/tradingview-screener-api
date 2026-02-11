@@ -94,34 +94,42 @@ const screener = new StockScreener();
 
 // Find mid-cap stocks with strong volume
 screener
-  .where(StockField.MARKET_CAPITALIZATION.between(1e9, 100e9))  // $1B - $100B market cap
-  .where(StockField.PRICE.gt(10))                                // Price > $10
-  .where(StockField.VOLUME.gte(1_000_000))                       // Volume >= 1M shares
-  .select(
-    StockField.NAME,
-    StockField.PRICE,
-    StockField.MARKET_CAPITALIZATION,
-    StockField.VOLUME
-  )
-  .sortBy(StockField.MARKET_CAPITALIZATION, false)               // Sort by market cap (descending)
-  .setRange(0, 50);                                              // Get top 50 results
+    .where(StockField.MARKET_CAPITALIZATION.between(1e9, 100e9))  // $1B - $100B market cap
+    .where(StockField.PRICE.gt(10))                                // Price > $10
+    .where(StockField.VOLUME.gte(10_000_000))                       // Volume >= 10M shares
+    .select(
+        StockField.NAME,
+        StockField.PRICE,
+        StockField.MARKET_CAPITALIZATION,
+        StockField.VOLUME
+    )
+    .sortBy(StockField.MARKET_CAPITALIZATION, false)               // Sort by market cap (descending)
+    .setRange(0, 10);                                              // Get top 10 results
 
 // Execute the query
 const results = await screener.get();
 
 // Display results
 console.table(results.data);
+
 ```
 
 **Output:**
 ```
-┌─────────┬────────────────┬─────────┬──────────────┬───────────┐
-│ (index) │ name           │ close   │ market_cap   │ volume    │
-├─────────┼────────────────┼─────────┼──────────────┼───────────┤
-│ 0       │ 'Apple Inc.'   │ 178.23  │ 2.8T         │ 52.1M     │
-│ 1       │ 'Microsoft'    │ 374.58  │ 2.7T         │ 23.4M     │
-│ 2       │ 'Alphabet'     │ 139.64  │ 1.7T         │ 21.8M     │
-└─────────┴────────────────┴─────────┴──────────────┴───────────┘
+┌─────────┬───────────────┬────────┬────────┬───────────────────┬──────────┐
+│ (index) │ symbol        │ name   │ close  │ market_cap_basic  │ volume   │
+├─────────┼───────────────┼────────┼────────┼───────────────────┼──────────┤
+│ 0       │ 'NYSE:SPOT'   │ 'SPOT' │ 476.02 │ 98009666941.52788 │ 10859484 │
+│ 1       │ 'NYSE:CVS'    │ 'CVS'  │ 75.62  │ 95994481028.1679  │ 13120315 │
+│ 2       │ 'NYSE:PBR'    │ 'PBR'  │ 15.33  │ 94777489519.2955  │ 15943064 │
+│ 3       │ 'NYSE:NKE'    │ 'NKE'  │ 63.04  │ 93323382260.16087 │ 13003435 │
+│ 4       │ 'NYSE:FCX'    │ 'FCX'  │ 63.26  │ 90836974679.75821 │ 11647363 │
+│ 5       │ 'NYSE:NU'     │ 'NU'   │ 17.57  │ 85136763028.70029 │ 49285274 │
+│ 6       │ 'NYSE:WMB'    │ 'WMB'  │ 68.84  │ 84068705263.16699 │ 15583731 │
+│ 7       │ 'NASDAQ:SNDK' │ 'SNDK' │ 541.64 │ 79928326188.71019 │ 15903990 │
+│ 8       │ 'NYSE:B'      │ 'B'    │ 46.95  │ 79225019262.32336 │ 16768169 │
+│ 9       │ 'NASDAQ:MDLZ' │ 'MDLZ' │ 60.65  │ 77743933905.28818 │ 12195996 │
+└─────────┴───────────────┴────────┴────────┴───────────────────┴──────────┘
 ```
 
 ---
