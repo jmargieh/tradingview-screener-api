@@ -14,8 +14,8 @@ const screener = new FuturesScreener();
 
 ```typescript
 screener
-  .where(FuturesField.PRICE.gt(1000))
-  .select(FuturesField.NAME, FuturesField.PRICE);
+  .where(FuturesField.CLOSE.gt(1000))
+  .select(FuturesField.NAME, FuturesField.CLOSE);
 
 const results = await screener.get();
 console.table(results.data);
@@ -25,7 +25,7 @@ console.table(results.data);
 
 ```typescript
 FuturesField.NAME     // Futures contract name
-FuturesField.PRICE    // Current price
+FuturesField.CLOSE    // Current price
 ```
 
 ## Complete Example
@@ -37,9 +37,9 @@ async function findFutures() {
   const screener = new FuturesScreener();
 
   screener
-    .where(FuturesField.PRICE.gt(100))
-    .select(FuturesField.NAME, FuturesField.PRICE)
-    .sortBy(FuturesField.PRICE, false)
+    .where(FuturesField.CLOSE.gt(100))
+    .select(FuturesField.NAME, FuturesField.CLOSE)
+    .sortBy(FuturesField.CLOSE, false)
     .setRange(0, 50);
 
   const results = await screener.get();

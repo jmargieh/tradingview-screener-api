@@ -130,7 +130,7 @@ describe('Other Screeners Integration', () => {
       mockPost.mockResolvedValue(mockResponse);
 
       const screener = new FuturesScreener();
-      screener.select(FuturesField.NAME, FuturesField.PRICE);
+      screener.select(FuturesField.NAME, FuturesField.CLOSE);
 
       const results = await screener.get();
 
@@ -164,7 +164,7 @@ describe('Other Screeners Integration', () => {
       mockPost.mockResolvedValue(mockResponse);
 
       const screener = new CoinScreener();
-      screener.select(CoinField.NAME, CoinField.PRICE);
+      screener.select(CoinField.NAME, CoinField.CLOSE);
 
       const results = await screener.get();
 

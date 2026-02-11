@@ -14,8 +14,8 @@ const screener = new CoinScreener();
 
 ```typescript
 screener
-  .where(CoinField.PRICE.gt(0.01))
-  .select(CoinField.NAME, CoinField.PRICE);
+  .where(CoinField.CLOSE.gt(0.01))
+  .select(CoinField.NAME, CoinField.CLOSE);
 
 const results = await screener.get();
 console.table(results.data);
@@ -25,7 +25,7 @@ console.table(results.data);
 
 ```typescript
 CoinField.NAME     // Coin name
-CoinField.PRICE    // Current price
+CoinField.CLOSE    // Current price
 ```
 
 ## Complete Example
@@ -37,9 +37,9 @@ async function findCoins() {
   const screener = new CoinScreener();
 
   screener
-    .where(CoinField.PRICE.between(0.001, 10))
-    .select(CoinField.NAME, CoinField.PRICE)
-    .sortBy(CoinField.PRICE, false)
+    .where(CoinField.CLOSE.between(0.001, 10))
+    .select(CoinField.NAME, CoinField.CLOSE)
+    .sortBy(CoinField.CLOSE, false)
     .setRange(0, 50);
 
   const results = await screener.get();
